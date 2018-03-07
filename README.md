@@ -2,7 +2,7 @@
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flagrow/impersonate/blob/master/LICENSE.md) [![Latest Stable Version](https://img.shields.io/packagist/v/flagrow/impersonate.svg)](https://packagist.org/packages/flagrow/impersonate) [![Total Downloads](https://img.shields.io/packagist/dt/flagrow/impersonate.svg)](https://packagist.org/packages/flagrow/impersonate) [![Donate](https://img.shields.io/badge/patreon-support-yellow.svg)](https://www.patreon.com/flagrow) [![Join our Discord server](https://discordapp.com/api/guilds/240489109041315840/embed.png)](https://flagrow.io/join-discord)
 
-This extension adds a "Log in as user" open on user profiles for administrators.
+This extension adds a "Log in as user" button on user profiles for administrators.
 
 ## Installation
 
