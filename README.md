@@ -23,7 +23,7 @@ php flarum cache:clear
 ## Configuration
 
 You can configure which groups can impersonate users by going to *Permissions > Login as other users*.
-Use with caution, as anybody with that permission can easily access the private data of every user on the forum.
+Use with caution, as anybody with that permission can easily access the private data of every user on the forum **and change any admin setting / permission / group by logging in as an administrator !**
 
 ## Support our work
 
