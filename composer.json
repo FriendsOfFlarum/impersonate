@@ -1,0 +1,45 @@
+{
+    "name": "flagrow/impersonate",
+    "description": "Login as other users of your forum",
+    "keywords": [
+        "extension",
+        "flarum",
+        "flagrow",
+        "impersonate",
+        "login"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Clark Winkelmann",
+            "email": "clark.winkelmann@gmail.com",
+            "homepage": "https://clarkwinkelmann.com/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/flagrow/impersonate/issues",
+        "source": "https://github.com/flagrow/impersonate"
+    },
+    "require": {
+        "flarum/core": "^0.1.0-beta.7"
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Flagrow Impersonate",
+            "icon": {
+                "name": "id-card",
+                "backgroundColor": "#f4f4f4",
+                "color": "#5f4bb6"
+            }
+        },
+        "flagrow": {
+            "discuss": "https://discuss.flarum.org/d/9868-flagrow-impersonate-login-as-other-users"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Flagrow\\Impersonate\\": "src/"
+        }
+    }
+}
