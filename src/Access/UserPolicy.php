@@ -2,8 +2,8 @@
 
 namespace Flagrow\Impersonate\Access;
 
-use Flarum\Core\Access\AbstractPolicy;
-use Flarum\Core\User;
+use Flarum\User\AbstractPolicy;
+use Flarum\User\User;
 
 class UserPolicy extends AbstractPolicy
 {
