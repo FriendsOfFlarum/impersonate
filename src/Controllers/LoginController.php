@@ -5,17 +5,18 @@ namespace Flagrow\Impersonate\Controllers;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookies;
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Core\Access\AssertPermissionTrait;
-use Flarum\Core\User;
-use Flarum\Http\Controller\ControllerInterface;
 use Flarum\Http\CookieFactory;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
+use Flarum\User\AssertPermissionTrait;
+use Flarum\User\User;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class LoginController implements ControllerInterface
+class LoginController implements RequestHandlerInterface
 {
     use AssertPermissionTrait;
 
@@ -32,7 +33,13 @@ class LoginController implements ControllerInterface
         $this->cookies = $cookies;
     }
 
-    public function handle(ServerRequestInterface $request)
+    /**
+     * Handle the request and return a response.
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws \Flarum\User\Exception\PermissionDeniedException
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = array_get($request->getQueryParams(), 'id');
 

@@ -2,18 +2,18 @@
 
 namespace Flagrow\Impersonate\Listeners;
 
+use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Event\PrepareApiAttributes;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddUserAttributes
 {
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PrepareApiAttributes::class, [$this, 'addAttributes']);
+        $events->listen(Serializing::class, [$this, 'addAttributes']);
     }
 
-    public function addAttributes(PrepareApiAttributes $event)
+    public function addAttributes(Serializing $event)
     {
         if ($event->isSerializer(UserSerializer::class)) {
             $event->attributes['flagrowCanImpersonate'] = $event->actor->can('flagrowCanImpersonate', $event->model);

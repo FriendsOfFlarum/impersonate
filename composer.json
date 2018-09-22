@@ -28,7 +28,7 @@
         "flarum-extension": {
             "title": "Flagrow Impersonate",
             "icon": {
-                "name": "id-card",
+                "name": "fas fa-id-card",
                 "backgroundColor": "#f4f4f4",
                 "color": "#5f4bb6"
             }

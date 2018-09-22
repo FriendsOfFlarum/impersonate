@@ -1,10 +1,5 @@
-.gitattributes export-ignore
-.github export-ignore
-.gitignore export-ignore
-.gitmodules export-ignore
-js/*/src export-ignore
-js/*/Gulfile.js
-js/*/package.json
-js/*/yarn.lock
+js/src export-ignore
+js/package-lock.json export-ignore
+.git* export-ignore
 
-js/*/dist/*.js -diff
+js/dist/*.js -diff
