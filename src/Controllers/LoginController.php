@@ -10,10 +10,10 @@ use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
+use Illuminate\Contracts\Session\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
 class LoginController implements RequestHandlerInterface
@@ -51,7 +51,7 @@ class LoginController implements RequestHandlerInterface
         $this->assertCan($request->getAttribute('actor'), 'flagrowCanImpersonate', $user);
 
         /**
-         * @var $session SessionInterface
+         * @var $session Session
          */
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
