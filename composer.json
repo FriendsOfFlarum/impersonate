@@ -3,10 +3,8 @@
     "description": "Login as other users of your forum",
     "keywords": [
         "extension",
-        "flarum",
-        "flagrow",
-        "impersonate",
-        "login"
+        "flarum", "flagrow",
+        "impersonate", "login"
     ],
     "type": "flarum-extension",
     "license": "MIT",
@@ -34,7 +32,7 @@
             }
         },
         "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/9868-flagrow-impersonate-login-as-other-users"
+            "discuss": "https://discuss.flarum.org/d/9868"
         }
     },
     "autoload": {
