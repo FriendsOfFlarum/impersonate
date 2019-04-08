@@ -1,0 +1,8 @@
+flagrow-impersonate:
+    admin:
+        permissions:
+            login: Als anderen User einloggen
+
+    forum:
+        user_controls:
+            impersonate_button: Als User einloggen 
