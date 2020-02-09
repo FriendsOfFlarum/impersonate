@@ -11,6 +11,6 @@ class UserPolicy extends AbstractPolicy
 
     public function flagrowCanImpersonate(User $actor, User $user)
     {
-        return $actor->can('flagrow-impersonate.login') && $actor->id !== $user->id;
+        return $actor->can('flagrow-impersonate.login') && $actor->id !== $user->id && (!$user->isAdmin() || $actor->isAdmin() && $user->isAdmin());
     }
 }
