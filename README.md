@@ -2,7 +2,7 @@
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/FriendsOfFlarum/impersonate/blob/master/LICENSE.md) [![Latest Stable Version](https://img.shields.io/packagist/v/fof/impersonate.svg)](https://packagist.org/packages/fof/impersonate) [![Total Downloads](https://img.shields.io/packagist/dt/fof/impersonate.svg)](https://packagist.org/packages/fof/impersonate) [![OpenCollective](https://img.shields.io/badge/opencollective-fof-blue.svg)](https://opencollective.com/fof/donate)
 
-This extension adds a "Log in as user" button on user profiles for administrators.
+This extension adds a "Log in as user" button on user profiles for administrators and others who are granted the permission.
 
 ## Installation
 
