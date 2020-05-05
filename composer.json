@@ -20,8 +20,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/fof/impersonate/issues",
-        "source": "https://github.com/fof/impersonate"
+        "issues": "https://github.com/FriendsOfFlarum/impersonate/issues",
+        "source": "https://github.com/FriendsOfFlarum/impersonate"
     },
     "require": {
         "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.14"
@@ -41,7 +41,7 @@
     },
     "replace": {
         "flagrow/impersonate": "*"
-      },
+    },
     "autoload": {
         "psr-4": {
             "FoF\\Impersonate\\": "src/"

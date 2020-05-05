@@ -18,7 +18,7 @@ class UserPolicy extends AbstractPolicy
 {
     protected $model = User::class;
 
-    public function canImpersonate(User $actor, User $user)
+    public function fofCanImpersonate(User $actor, User $user)
     {
         return $actor->can('fof-impersonate.login') &&
             $actor->id !== $user->id &&
