@@ -25,7 +25,7 @@ class AddUserAttributes
     public function addAttributes(Serializing $event)
     {
         if ($event->isSerializer(UserSerializer::class)) {
-            $event->attributes['fofCanImpersonate'] = $event->actor->can('canImpersonate', $event->model);
+            $event->attributes['fofCanImpersonate'] = $event->actor->can('fofCanImpersonate', $event->model);
         }
     }
 }
