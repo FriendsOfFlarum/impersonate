@@ -5,18 +5,18 @@ import Button from 'flarum/components/Button';
 import Model from 'flarum/Model';
 import User from 'flarum/models/User';
 
-app.initializers.add('flagrow/impersonate', () => {
-    User.prototype.flagrowCanImpersonate = Model.attribute('flagrowCanImpersonate');
+app.initializers.add('fof/impersonate', () => {
+    User.prototype.fofCanImpersonate = Model.attribute('fofCanImpersonate');
 
     extend(UserControls, 'moderationControls', (items, user) => {
-        if (user.flagrowCanImpersonate()) {
-            items.add('flagrow-impersonate-login', Button.component({
-                children: app.translator.trans('flagrow-impersonate.forum.user_controls.impersonate_button'),
+        if (user.fofCanImpersonate()) {
+            items.add('fof-impersonate-login', Button.component({
+                children: app.translator.trans('fof-impersonate.forum.user_controls.impersonate_button'),
                 icon: 'fas fa-id-card',
                 onclick() {
                     app.request({
                         method: 'POST',
-                        url: `${app.forum.attribute('apiUrl')}/flagrow/impersonate/${user.id()}`,
+                        url: `${app.forum.attribute('apiUrl')}/impersonate/${user.id()}`,
                     }).then(() => {
                         window.location.reload();
                     });

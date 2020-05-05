@@ -1,6 +1,15 @@
 <?php
 
-namespace Flagrow\Impersonate\Listeners;
+/*
+ * This file is part of fof/impersonate.
+ *
+ * Copyright (c) 2020 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace FoF\Impersonate\Listeners;
 
 use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\UserSerializer;
@@ -16,7 +25,7 @@ class AddUserAttributes
     public function addAttributes(Serializing $event)
     {
         if ($event->isSerializer(UserSerializer::class)) {
-            $event->attributes['flagrowCanImpersonate'] = $event->actor->can('flagrowCanImpersonate', $event->model);
+            $event->attributes['fofCanImpersonate'] = $event->actor->can('canImpersonate', $event->model);
         }
     }
 }
