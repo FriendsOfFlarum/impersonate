@@ -1,6 +1,15 @@
 <?php
 
-namespace Flagrow\Impersonate\Controllers;
+/*
+ * This file is part of fof/impersonate.
+ *
+ * Copyright (c) 2020 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace FoF\Impersonate\Controllers;
 
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Http\Rememberer;
@@ -43,7 +52,7 @@ class LoginController implements RequestHandlerInterface
          */
         $user = User::findOrFail($id);
 
-        $this->assertCan($request->getAttribute('actor'), 'flagrowCanImpersonate', $user);
+        $this->assertCan($request->getAttribute('actor'), 'fofCanImpersonate', $user);
 
         /**
          * @var $session Session

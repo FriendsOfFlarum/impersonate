@@ -1,5 +1,5 @@
 {
-    "name": "flagrow/impersonate",
+    "name": "fof/impersonate",
     "description": "Login as other users of your forum",
     "keywords": [
         "extension",
@@ -13,31 +13,38 @@
             "name": "Clark Winkelmann",
             "email": "clark.winkelmann@gmail.com",
             "homepage": "https://clarkwinkelmann.com/"
+        },
+        {
+            "name": "Ian Morland",
+            "email": "ian@morland.me"
         }
     ],
     "support": {
-        "issues": "https://github.com/flagrow/impersonate/issues",
-        "source": "https://github.com/flagrow/impersonate"
+        "issues": "https://github.com/FriendsOfFlarum/impersonate/issues",
+        "source": "https://github.com/FriendsOfFlarum/impersonate"
     },
     "require": {
         "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.14"
     },
     "extra": {
         "flarum-extension": {
-            "title": "Flagrow Impersonate",
+            "title": "FoF Impersonate",
             "icon": {
                 "name": "fas fa-id-card",
-                "backgroundColor": "#f4f4f4",
-                "color": "#5f4bb6"
+                "backgroundColor": "#e74c3c",
+                "color": "#fff"
             }
         },
         "flagrow": {
             "discuss": "https://discuss.flarum.org/d/9868"
         }
     },
+    "replace": {
+        "flagrow/impersonate": "*"
+    },
     "autoload": {
         "psr-4": {
-            "Flagrow\\Impersonate\\": "src/"
+            "FoF\\Impersonate\\": "src/"
         }
     }
 }
