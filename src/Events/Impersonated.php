@@ -25,12 +25,6 @@ class Impersonated
      */
     public $user;
 
-    /**
-     * Impersonated constructor.
-     *
-     * @param User $actor
-     * @param User $user
-     */
     public function __construct(User $actor, User $user)
     {
         $this->actor = $actor;
