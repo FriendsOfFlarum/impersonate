@@ -28,8 +28,8 @@ class Impersonated
     /**
      * Impersonated constructor.
      *
-     * @param Discussion $discussion
-     * @param User       $actor
+     * @param User $actor
+     * @param User $user
      */
     public function __construct(User $actor, User $user)
     {
