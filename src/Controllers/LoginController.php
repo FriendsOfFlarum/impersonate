@@ -17,8 +17,9 @@ use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
+use FoF\Impersonate\Events\Impersonated;
 use FoF\ModeratorNotes\Command\CreateModeratorNote;
-use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Session\Session;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -68,15 +69,7 @@ class LoginController implements RequestHandlerInterface
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
 
-        if (class_exists(CreateModeratorNote::class) && $this->extensions->isEnabled('fof-moderator-notes')) {
-            $this->bus->dispatch(
-                new CreateModeratorNote(
-                    $actor,
-                    $user->id,
-                    app('translator')->trans('fof-impersonate.api.moderator-notes.auto-note')
-                )
-            );
-        }
+        $this->bus->dispatch(new Impersonated($actor, $user));
 
         return $this->rememberer->forget(new JsonResponse(true));
     }
