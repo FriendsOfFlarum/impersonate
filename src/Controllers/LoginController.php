@@ -12,13 +12,11 @@
 namespace FoF\Impersonate\Controllers;
 
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Extension\ExtensionManager;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
 use FoF\Impersonate\Events\Impersonated;
-use FoF\ModeratorNotes\Command\CreateModeratorNote;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Session\Session;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -32,16 +30,14 @@ class LoginController implements RequestHandlerInterface
 
     protected $authenticator;
     protected $rememberer;
-    protected $extensions;
     protected $bus;
 
     public $serializer = UserSerializer::class;
 
-    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, ExtensionManager $extensions, Dispatcher $bus)
+    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, Dispatcher $bus)
     {
         $this->authenticator = $authenticator;
         $this->rememberer = $rememberer;
-        $this->extensions = $extensions;
         $this->bus = $bus;
     }
 
