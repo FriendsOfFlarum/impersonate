@@ -42,6 +42,9 @@
     "replace": {
         "flagrow/impersonate": "*"
     },
+    "suggest": {
+        "fof/moderator-notes": "Allows audit logging when users are impersonated"
+    },
     "autoload": {
         "psr-4": {
             "FoF\\Impersonate\\": "src/"
