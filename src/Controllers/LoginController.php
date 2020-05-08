@@ -16,6 +16,8 @@ use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
+use FoF\Impersonate\Events\Impersonated;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Session\Session;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -28,13 +30,15 @@ class LoginController implements RequestHandlerInterface
 
     protected $authenticator;
     protected $rememberer;
+    protected $bus;
 
     public $serializer = UserSerializer::class;
 
-    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer)
+    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, Dispatcher $bus)
     {
         $this->authenticator = $authenticator;
         $this->rememberer = $rememberer;
+        $this->bus = $bus;
     }
 
     /**
@@ -45,6 +49,7 @@ class LoginController implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $actor = $request->getAttribute('actor');
         $id = array_get($request->getQueryParams(), 'id');
 
         /**
@@ -52,13 +57,15 @@ class LoginController implements RequestHandlerInterface
          */
         $user = User::findOrFail($id);
 
-        $this->assertCan($request->getAttribute('actor'), 'fofCanImpersonate', $user);
+        $this->assertCan($actor, 'fofCanImpersonate', $user);
 
         /**
          * @var $session Session
          */
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
+
+        $this->bus->dispatch(new Impersonated($actor, $user));
 
         return $this->rememberer->forget(new JsonResponse(true));
     }
