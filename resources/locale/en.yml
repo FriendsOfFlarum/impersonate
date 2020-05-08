@@ -6,3 +6,7 @@ fof-impersonate:
     forum:
         user_controls:
             impersonate_button: Login as user
+
+    api:
+        moderator-notes:
+            auto-note: FoF Impersonate was used to switch to this user

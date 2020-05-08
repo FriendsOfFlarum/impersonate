@@ -12,10 +12,13 @@
 namespace FoF\Impersonate\Controllers;
 
 use Flarum\Api\Serializer\UserSerializer;
+use Flarum\Extension\ExtensionManager;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
+use FoF\ModeratorNotes\Command\CreateModeratorNote;
+use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Session\Session;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -28,13 +31,17 @@ class LoginController implements RequestHandlerInterface
 
     protected $authenticator;
     protected $rememberer;
+    protected $extensions;
+    protected $bus;
 
     public $serializer = UserSerializer::class;
 
-    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer)
+    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, ExtensionManager $extensions, Dispatcher $bus)
     {
         $this->authenticator = $authenticator;
         $this->rememberer = $rememberer;
+        $this->extensions = $extensions;
+        $this->bus = $bus;
     }
 
     /**
@@ -45,6 +52,7 @@ class LoginController implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $actor = $request->getAttribute('actor');
         $id = array_get($request->getQueryParams(), 'id');
 
         /**
@@ -52,13 +60,23 @@ class LoginController implements RequestHandlerInterface
          */
         $user = User::findOrFail($id);
 
-        $this->assertCan($request->getAttribute('actor'), 'fofCanImpersonate', $user);
+        $this->assertCan($actor, 'fofCanImpersonate', $user);
 
         /**
          * @var $session Session
          */
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
+
+        if (class_exists(CreateModeratorNote::class) && $this->extensions->isEnabled('fof-moderator-notes')) {
+            $this->bus->dispatch(
+                new CreateModeratorNote(
+                    $actor,
+                    $user->id,
+                    app('translator')->trans('fof-impersonate.api.moderator-notes.auto-note')
+                )
+            );
+        }
 
         return $this->rememberer->forget(new JsonResponse(true));
     }
