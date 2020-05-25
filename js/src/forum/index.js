@@ -19,7 +19,12 @@ app.initializers.add('fof/impersonate', () => {
                     children: app.translator.trans('fof-impersonate.forum.user_controls.impersonate_button'),
                     icon: 'fas fa-id-card',
                     onclick() {
-                        app.modal.show(new ImpersonateModal({ callback: window.location.reload(), user }));
+                        app.modal.show(
+                            new ImpersonateModal({
+                                callback: () => window.location.reload(),
+                                user,
+                            })
+                        );
                     },
                 })
             );
