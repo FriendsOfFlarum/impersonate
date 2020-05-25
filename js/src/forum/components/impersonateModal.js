@@ -67,10 +67,24 @@ export default class ImpersonateModal extends Modal {
         e.preventDefault();
         this.loading = true;
 
-        app.store.createRecord('impersonate').save({
-            userId: this.user.id(),
-            reason: this.reason(),
-        }),
-            { errorHandler: this.onerror.bind(this) }.then(this.props.callback).catch(() => {});
+        app.store
+            .createRecord('impersonate')
+            .save(
+                {
+                    userId: this.user.id(),
+                    reason: this.reason(),
+                },
+                { errorHandler: this.onerror.bind(this) }
+            )
+            .then(this.props.callback)
+            .catch(() => {});
+    }
+
+    onerror(error) {
+        if (error.status === 422) {
+            error.alert.props.children = app.translator.trans('fof-impersonate.forum.modal.placeholder_required');
+        }
+        this.loading = false;
+        super.onerror(error);
     }
 }

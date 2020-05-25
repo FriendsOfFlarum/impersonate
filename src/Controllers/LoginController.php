@@ -58,7 +58,7 @@ class LoginController implements RequestHandlerInterface
         $id = $requestData['userId'];
         $reason = $requestData['reason'];
 
-        if (app('flarum.settings')->get('fof-impersonate.require_reason', false) && $reason === '') {
+        if ((bool) app('flarum.settings')->get('fof-impersonate.require_reason') && $reason === '') {
             throw new ValidationException([
                 'error' => app('translator')->trans('fof-impersonate.forum.modal.placeholder_required')
             ]);
