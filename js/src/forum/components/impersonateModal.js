@@ -8,8 +8,8 @@ export default class ImpersonateModal extends Modal {
         this.user = this.props.user;
         this.reason = m.prop('');
         this.loading = false;
-        this.modNotesEnabled = app.forum.attribute('impersonateEnableReason');
-        this.reasonRequired = app.forum.attribute('impersonateReasonRequired')
+        this.reasonEnabled = app.forum.attribute('impersonateEnableReason');
+        this.reasonRequired = app.forum.attribute('impersonateReasonRequired');
     }
 
     className() {
@@ -31,31 +31,33 @@ export default class ImpersonateModal extends Modal {
                     </p>
                 </div>
                 <div className="Form Form--centered">
-                {this.modNotesEnabled ? (
-
+                    {this.reasonEnabled ? (
                         <div className="Form-group">
                             <textarea
                                 className="FormControl"
                                 value={this.reason()}
-                                placeholder={this.reasonRequired ? app.translator.trans('fof-impersonate.forum.modal.placeholder_required') : app.translator.trans('fof-impersonate.forum.modal.placeholder_optional')}
+                                placeholder={
+                                    this.reasonRequired
+                                        ? app.translator.trans('fof-impersonate.forum.modal.placeholder_required')
+                                        : app.translator.trans('fof-impersonate.forum.modal.placeholder_optional')
+                                }
                                 oninput={m.withAttr('value', this.reason)}
                                 rows="4"
                             />
                         </div>
-
-                ) : (
-                    ''
-                )}
-                <div className="Form-group">
-                    {Button.component({
-                        className: 'Button Button--primary Button--block',
-                        type: 'submit',
-                        loading: this.loading,
-                        children: app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
-                            username: username(this.user),
-                        }),
-                    })}
-                </div>
+                    ) : (
+                        ''
+                    )}
+                    <div className="Form-group">
+                        {Button.component({
+                            className: 'Button Button--primary Button--block',
+                            type: 'submit',
+                            loading: this.loading,
+                            children: app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
+                                username: username(this.user),
+                            }),
+                        })}
+                    </div>
                 </div>
             </div>
         );
@@ -65,16 +67,10 @@ export default class ImpersonateModal extends Modal {
         e.preventDefault();
         this.loading = true;
 
-        app.store
-            .createRecord('impersonate')
-            .save({
-                userId: this.user.id(),
-                reason: this.reason(),
-            }),
-            { errorHandler: this.onerror.bind(this) }
-            .then(this.props.callback)
-            .catch(() => {});
+        app.store.createRecord('impersonate').save({
+            userId: this.user.id(),
+            reason: this.reason(),
+        }),
+            { errorHandler: this.onerror.bind(this) }.then(this.props.callback).catch(() => {});
     }
-
-
 }

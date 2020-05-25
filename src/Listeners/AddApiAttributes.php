@@ -43,10 +43,10 @@ class AddApiAttributes
     public function prepareApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(ForumSerializer::class) && $this->extensions->isEnabled('flarum-tags')) {
-            $event->attributes['impersonateEnableReason'] = app('flarum.settings')->get('fof-impersonate.enable_reason', false);
+            $event->attributes['impersonateEnableReason'] = (bool) app('flarum.settings')->get('fof-impersonate.enable_reason');
 
-            if (app('flarum.settings')->get('fof-impersonate.enable_reason', false)) {
-                $event->attributes['impersonateReasonRequired'] = app('flarum.settings')->get('fof-impersonate.require_reason', false);
+            if ((bool) app('flarum.settings')->get('fof-impersonate.enable_reason')) {
+                $event->attributes['impersonateReasonRequired'] = (bool) app('flarum.settings')->get('fof-impersonate.require_reason');
             }
         }
     }
