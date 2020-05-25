@@ -7,6 +7,7 @@ export default class ImpersonatelModal extends Modal {
         super.init();
         this.user = this.props.user;
         this.reason = m.prop('');
+        this.loading = false;
     }
 
     className() {
@@ -47,7 +48,8 @@ export default class ImpersonatelModal extends Modal {
 
     onsubmit(e) {
         e.preventDefault();
-
+        this.loading = true;
+        
         app.store
             .createRecord('impersonate')
             .save({
