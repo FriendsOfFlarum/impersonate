@@ -21,6 +21,11 @@ export default class ImpersonatelModal extends Modal {
     content() {
         return (
             <div className="Modal-body">
+                <div>
+                    <p>{app.translator.trans('fof-impersonate.forum.modal.label', {
+                        username: username(this.user)
+                    })}</p>
+                </div>
                 <div className="Form Form--centered">
                     <div className="Form-group">
                         <textarea
@@ -49,7 +54,7 @@ export default class ImpersonatelModal extends Modal {
     onsubmit(e) {
         e.preventDefault();
         this.loading = true;
-        
+
         app.store
             .createRecord('impersonate')
             .save({

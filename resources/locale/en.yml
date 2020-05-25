@@ -5,7 +5,8 @@ fof-impersonate:
 
     forum:
         modal:
-            title: You are about to login as another user
+            title: Login as another user
+            label: With great power comes great responsibility. By continuing, you will become {username} until you log out.
             placeholder: (Optional) Provide your reason for switching to this user
             impersonate_username: Login as {username}
         user_controls:
