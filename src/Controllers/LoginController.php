@@ -72,6 +72,15 @@ class LoginController implements RequestHandlerInterface
 
         $this->bus->dispatch(new Impersonated($actor, $user, $reason));
 
-        return $this->rememberer->forget(new JsonResponse(true));
+        return $this->rememberer->forget(new JsonResponse(
+            [
+                'data' => [
+                    'type' => 'impersonate',
+                    'attributes' => [
+                        'success' => true
+                    ]
+                ]
+            ]
+        ));
     }
 }
