@@ -48,7 +48,7 @@ export default class ImpersonatelModal extends Modal {
     onsubmit(e) {
         e.preventDefault();
 
-        result = app.store
+        app.store
             .createRecord('impersonate')
             .save({
                 userId: this.user.id(),
