@@ -12,9 +12,11 @@
 namespace FoF\Impersonate;
 
 use Flarum\Extend;
+use FoF\Components\Extend\AddFofComponents;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
+    new AddFofComponents(),
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js'),
 
@@ -27,6 +29,7 @@ return [
         ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),
 
     function (Dispatcher $events) {
+        $events->subscribe(Listeners\AddApiAttributes::class);
         $events->subscribe(Listeners\AddUserAttributes::class);
 
         $events->subscribe(Access\UserPolicy::class);

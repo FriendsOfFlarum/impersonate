@@ -12,6 +12,7 @@
 namespace FoF\Impersonate\Controllers;
 
 use Flarum\Api\Serializer\UserSerializer;
+use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
@@ -56,6 +57,12 @@ class LoginController implements RequestHandlerInterface
 
         $id = $requestData['userId'];
         $reason = $requestData['reason'];
+
+        if (app('flarum.settings')->get('fof-impersonate.require_reason', false) && $reason === '') {
+            throw new ValidationException([
+                'error' => app('translator')->trans('fof-impersonate.forum.modal.placeholder_required')
+            ]);
+        }
 
         /**
          * @var $user User
