@@ -50,7 +50,12 @@ class LoginController implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $actor = $request->getAttribute('actor');
-        $id = array_get($request->getQueryParams(), 'id');
+
+        $requestBody = $request->getParsedBody();
+        $requestData = $requestBody['data']['attributes'];
+
+        $id = $requestData['userId'];
+        $reason = $requestData['reason'];
 
         /**
          * @var $user User
@@ -65,7 +70,7 @@ class LoginController implements RequestHandlerInterface
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
 
-        $this->bus->dispatch(new Impersonated($actor, $user));
+        $this->bus->dispatch(new Impersonated($actor, $user, $reason));
 
         return $this->rememberer->forget(new JsonResponse(true));
     }

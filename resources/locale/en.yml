@@ -4,5 +4,9 @@ fof-impersonate:
             login: Login as other users
 
     forum:
+        modal:
+            title: You are about to login as another user
+            placeholder: (Optional) Provide your reason for switching to this user
+            impersonate_username: Login as {username}
         user_controls:
             impersonate_button: Login as user

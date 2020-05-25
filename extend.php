@@ -24,8 +24,8 @@ return [
     new Extend\Locales(__DIR__ . '/resources/locale'),
 
     (new Extend\Routes('api'))
-        ->post('/impersonate/{id:[0-9]+}', 'fof.impersonate.api.login', Controllers\LoginController::class),
-        
+        ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),
+
     function (Dispatcher $events) {
         $events->subscribe(Listeners\AddUserAttributes::class);
 
