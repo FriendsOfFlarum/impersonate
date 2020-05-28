@@ -4,8 +4,8 @@ fof-impersonate:
             login: Login as other users
         settings:
             title: FoF Impersonate
-            enable_reason: Allow an optional reason to be entered before proceeding to impersonate another user. (Requires fof/moderator-notes)
-            require_reason: Require a reason to be entered before proceeding to impersonate another user. (Requires fof/moderator-notes)
+            require_reason: Require a reason to be entered before proceeding to impersonate another user.
+            no_settings_available: No settings are currently available. Try installing fof/moderator-notes
 
     forum:
         modal:

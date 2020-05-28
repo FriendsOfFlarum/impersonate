@@ -5,7 +5,7 @@ import { settings } from '@fof-components';
 
 const {
     SettingsModal,
-    items: { BooleanItem, NumberItem, StringItem },
+    items: { BooleanItem },
 } = settings;
 
 app.initializers.add('fof/impersonate', () => {
@@ -14,14 +14,13 @@ app.initializers.add('fof/impersonate', () => {
             new SettingsModal({
                 title: app.translator.trans('fof-impersonate.admin.settings.title'),
                 type: 'small',
-                items: [
-                    <BooleanItem key="fof-impersonate.enable_reason">
-                        {app.translator.trans('fof-impersonate.admin.settings.enable_reason')}
-                    </BooleanItem>,
-                    <BooleanItem key="fof-impersonate.require_reason">
-                        {app.translator.trans('fof-impersonate.admin.settings.require_reason')}
-                    </BooleanItem>,
-                ],
+                items: app.forum.attribute('impersonateEnableReason', false)
+                    ? [
+                          <BooleanItem key="fof-impersonate.require_reason">
+                              {app.translator.trans('fof-impersonate.admin.settings.require_reason')}
+                          </BooleanItem>,
+                      ]
+                    : [<p>{app.translator.trans('fof-impersonate.admin.settings.no_settings_available')}</p>],
             })
         );
 
