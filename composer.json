@@ -24,7 +24,8 @@
         "source": "https://github.com/FriendsOfFlarum/impersonate"
     },
     "require": {
-        "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.14"
+        "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.14",
+        "fof/components": "^0.1.1"
     },
     "extra": {
         "flarum-extension": {

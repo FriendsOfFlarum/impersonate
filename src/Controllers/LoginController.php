@@ -12,6 +12,7 @@
 namespace FoF\Impersonate\Controllers;
 
 use Flarum\Api\Serializer\UserSerializer;
+use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\User\AssertPermissionTrait;
@@ -50,7 +51,18 @@ class LoginController implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $actor = $request->getAttribute('actor');
-        $id = array_get($request->getQueryParams(), 'id');
+
+        $requestBody = $request->getParsedBody();
+        $requestData = $requestBody['data']['attributes'];
+
+        $id = $requestData['userId'];
+        $reason = $requestData['reason'];
+
+        if ((bool) app('flarum.settings')->get('fof-impersonate.require_reason') && $reason === '') {
+            throw new ValidationException([
+                'error' => app('translator')->trans('fof-impersonate.forum.modal.placeholder_required')
+            ]);
+        }
 
         /**
          * @var $user User
@@ -65,8 +77,17 @@ class LoginController implements RequestHandlerInterface
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);
 
-        $this->bus->dispatch(new Impersonated($actor, $user));
+        $this->bus->dispatch(new Impersonated($actor, $user, $reason));
 
-        return $this->rememberer->forget(new JsonResponse(true));
+        return $this->rememberer->forget(new JsonResponse(
+            [
+                'data' => [
+                    'type' => 'impersonate',
+                    'attributes' => [
+                        'success' => true
+                    ]
+                ]
+            ]
+        ));
     }
 }

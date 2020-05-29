@@ -25,9 +25,15 @@ class Impersonated
      */
     public $user;
 
-    public function __construct(User $actor, User $user)
+    /**
+     * @var string
+     */
+    public $switchReason;
+
+    public function __construct(User $actor, User $user, string $switchReason)
     {
         $this->actor = $actor;
         $this->user = $user;
+        $this->switchReason = $switchReason;
     }
 }
