@@ -11,17 +11,17 @@ const {
 app.initializers.add('fof/impersonate', () => {
     app.extensionSettings['fof-impersonate'] = () =>
         app.modal.show(
-            new SettingsModal({
+            SettingsModal, {
                 title: app.translator.trans('fof-impersonate.admin.settings.title'),
                 type: 'small',
-                items: app.forum.attribute('impersonateEnableReason', false)
+                items: s=> app.forum.attribute('impersonateEnableReason', false)
                     ? [
-                          <BooleanItem key="fof-impersonate.require_reason">
+                          <BooleanItem setting={s} name="fof-impersonate.require_reason">
                               {app.translator.trans('fof-impersonate.admin.settings.require_reason')}
                           </BooleanItem>,
                       ]
                     : [<p>{app.translator.trans('fof-impersonate.admin.settings.no_settings_available')}</p>],
-            })
+            }
         );
 
     extend(PermissionGrid.prototype, 'moderateItems', items => {

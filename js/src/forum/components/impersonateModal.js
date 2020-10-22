@@ -1,12 +1,14 @@
 import Modal from 'flarum/components/Modal';
 import Button from 'flarum/components/Button';
 import username from 'flarum/helpers/username';
+import stream from 'flarum/utils/Stream';
+import withAttr from 'flarum/utils/withAttr';
 
 export default class ImpersonateModal extends Modal {
-    init() {
-        super.init();
-        this.user = this.props.user;
-        this.reason = m.prop('');
+    oninit(vnode) {
+        super.oninit(vnode);
+        this.user = this.attrs.user;
+        this.reason = stream('');
         this.loading = false;
         this.reasonEnabled = app.forum.attribute('impersonateEnableReason');
         this.reasonRequired = app.forum.attribute('impersonateReasonRequired');
@@ -41,7 +43,7 @@ export default class ImpersonateModal extends Modal {
                                         ? app.translator.trans('fof-impersonate.forum.modal.placeholder_required')
                                         : app.translator.trans('fof-impersonate.forum.modal.placeholder_optional')
                                 }
-                                oninput={m.withAttr('value', this.reason)}
+                                oninput={withAttr('value', this.reason)}
                                 rows="4"
                             />
                         </div>
@@ -53,10 +55,10 @@ export default class ImpersonateModal extends Modal {
                             className: 'Button Button--primary Button--block',
                             type: 'submit',
                             loading: this.loading,
-                            children: app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
+                        }, app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
                                 username: username(this.user),
                             }),
-                        })}
+                    )}
                     </div>
                 </div>
             </div>
@@ -76,7 +78,7 @@ export default class ImpersonateModal extends Modal {
                 },
                 { errorHandler: this.onerror.bind(this) }
             )
-            .then(this.props.callback)
+            .then(this.attrs.callback)
             .catch(() => {});
     }
 
