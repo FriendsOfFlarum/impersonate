@@ -15,7 +15,6 @@ use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
-use Flarum\User\AssertPermissionTrait;
 use Flarum\User\User;
 use FoF\Impersonate\Events\Impersonated;
 use Illuminate\Events\Dispatcher;
@@ -27,8 +26,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LoginController implements RequestHandlerInterface
 {
-    use AssertPermissionTrait;
-
     protected $authenticator;
     protected $rememberer;
     protected $bus;
@@ -65,14 +62,14 @@ class LoginController implements RequestHandlerInterface
         }
 
         /**
-         * @var $user User
+         * @var User $user
          */
         $user = User::findOrFail($id);
 
-        $this->assertCan($actor, 'fofCanImpersonate', $user);
+        $actor->assertCan('fofCanImpersonate', $user);
 
         /**
-         * @var $session Session
+         * @var Session $session
          */
         $session = $request->getAttribute('session');
         $this->authenticator->logIn($session, $user->id);

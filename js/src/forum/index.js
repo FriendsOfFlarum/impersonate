@@ -16,17 +16,16 @@ app.initializers.add('fof/impersonate', () => {
             items.add(
                 'fof-impersonate-login',
                 Button.component({
-                    children: app.translator.trans('fof-impersonate.forum.user_controls.impersonate_button'),
                     icon: 'fas fa-id-card',
                     onclick() {
                         app.modal.show(
-                            new ImpersonateModal({
+                            ImpersonateModal, {
                                 callback: () => window.location.reload(),
                                 user,
-                            })
+                            }
                         );
                     },
-                })
+                }, app.translator.trans('fof-impersonate.forum.user_controls.impersonate_button'))
             );
         }
     });
