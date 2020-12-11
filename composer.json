@@ -3,8 +3,9 @@
     "description": "Login as other users of your forum",
     "keywords": [
         "extension",
-        "flarum", "flagrow",
-        "impersonate", "login"
+        "flarum",
+        "impersonate",
+        "login"
     ],
     "type": "flarum-extension",
     "license": "MIT",
@@ -15,21 +16,30 @@
             "homepage": "https://clarkwinkelmann.com/"
         },
         {
-            "name": "Ian Morland",
-            "email": "ian@morland.me"
+            "name": "IanM",
+            "homepage": "https://discuss.flarum.org/u/ianm",
+            "role": "Developer"
         }
     ],
     "support": {
         "issues": "https://github.com/FriendsOfFlarum/impersonate/issues",
-        "source": "https://github.com/FriendsOfFlarum/impersonate"
+        "source": "https://github.com/FriendsOfFlarum/impersonate",
+        "forum": "https://discuss.flarum.org/d/9868"
     },
+    "homepage": "https://friendsofflarum.org",
+    "funding": [
+        {
+            "type": "website",
+            "url": "https://opencollective.com/fof/donate"
+        }
+    ],
     "require": {
-        "flarum/core": ">=0.1.0-beta.14 <0.1.0-beta.15",
-        "fof/components": "^0.2.0"
+        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
     },
     "extra": {
         "flarum-extension": {
             "title": "FoF Impersonate",
+            "category": "moderation",
             "icon": {
                 "name": "fas fa-id-card",
                 "backgroundColor": "#e74c3c",
