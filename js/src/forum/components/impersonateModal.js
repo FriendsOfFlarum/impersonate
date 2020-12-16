@@ -10,8 +10,8 @@ export default class ImpersonateModal extends Modal {
         this.user = this.attrs.user;
         this.reason = stream('');
         this.loading = false;
-        this.reasonEnabled = app.forum.attribute('impersonateEnableReason');
-        this.reasonRequired = app.forum.attribute('impersonateReasonRequired');
+        this.reasonEnabled = app.initializers.has('fof-moderator-notes');
+        this.reasonRequired = this.user.impersonateReasonRequired();
     }
 
     className() {
@@ -51,14 +51,16 @@ export default class ImpersonateModal extends Modal {
                         ''
                     )}
                     <div className="Form-group">
-                        {Button.component({
-                            className: 'Button Button--primary Button--block',
-                            type: 'submit',
-                            loading: this.loading,
-                        }, app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
+                        {Button.component(
+                            {
+                                className: 'Button Button--primary Button--block',
+                                type: 'submit',
+                                loading: this.loading,
+                            },
+                            app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
                                 username: username(this.user),
-                            }),
-                    )}
+                            })
+                        )}
                     </div>
                 </div>
             </div>

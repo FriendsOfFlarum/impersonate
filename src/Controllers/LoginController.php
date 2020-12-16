@@ -15,6 +15,7 @@ use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\SessionAuthenticator;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
 use FoF\Impersonate\Events\Impersonated;
 use Illuminate\Events\Dispatcher;
@@ -23,20 +24,44 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class LoginController implements RequestHandlerInterface
 {
+    /**
+     * @var SessionAuthenticator
+     */
     protected $authenticator;
+
+    /**
+     * @var Rememberer
+     */
     protected $rememberer;
+
+    /**
+     * @var Dispatcher
+     */
     protected $bus;
+
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
 
     public $serializer = UserSerializer::class;
 
-    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, Dispatcher $bus)
+    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, Dispatcher $bus, SettingsRepositoryInterface $settings, TranslatorInterface $translator)
     {
         $this->authenticator = $authenticator;
         $this->rememberer = $rememberer;
         $this->bus = $bus;
+        $this->settings = $settings;
+        $this->translator = $translator;
     }
 
     /**
@@ -47,6 +72,9 @@ class LoginController implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /**
+         * @var User $actor
+         */
         $actor = $request->getAttribute('actor');
 
         $requestBody = $request->getParsedBody();
@@ -55,9 +83,9 @@ class LoginController implements RequestHandlerInterface
         $id = $requestData['userId'];
         $reason = $requestData['reason'];
 
-        if ((bool) app('flarum.settings')->get('fof-impersonate.require_reason') && $reason === '') {
+        if ((bool) $this->settings->get('fof-impersonate.require_reason') && $reason === '') {
             throw new ValidationException([
-                'error' => app('translator')->trans('fof-impersonate.forum.modal.placeholder_required')
+                'error' => $this->translator->trans('fof-impersonate.forum.modal.placeholder_required')
             ]);
         }
 

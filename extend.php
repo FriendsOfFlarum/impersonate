@@ -11,12 +11,11 @@
 
 namespace FoF\Impersonate;
 
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
-use FoF\Components\Extend\AddFofComponents;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\User\User;
 
 return [
-    new AddFofComponents(),
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js'),
 
@@ -28,10 +27,9 @@ return [
     (new Extend\Routes('api'))
         ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),
 
-    function (Dispatcher $events) {
-        $events->subscribe(Listeners\AddApiAttributes::class);
-        $events->subscribe(Listeners\AddUserAttributes::class);
+    (new Extend\ApiSerializer(UserSerializer::class))
+        ->mutate(AddUserImpersonateAttributes::class),
 
-        $events->subscribe(Access\UserPolicy::class);
-    },
+    (new Extend\Policy())
+        ->modelPolicy(User::class, Access\UserPolicy::class),
 ];
