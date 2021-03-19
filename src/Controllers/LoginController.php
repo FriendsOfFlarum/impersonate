@@ -14,6 +14,7 @@ namespace FoF\Impersonate\Controllers;
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
+use Flarum\Http\SessionAccessToken;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
@@ -24,7 +25,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginController implements RequestHandlerInterface
 {
@@ -103,7 +104,7 @@ class LoginController implements RequestHandlerInterface
          * @var Session $session
          */
         $session = $request->getAttribute('session');
-        $this->authenticator->logIn($session, $user->id);
+        $this->authenticator->logIn($session, SessionAccessToken::generate($user->id));
 
         $this->bus->dispatch(new Impersonated($actor, $user, $reason));
 

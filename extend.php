@@ -28,7 +28,7 @@ return [
         ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),
 
     (new Extend\ApiSerializer(UserSerializer::class))
-        ->mutate(AddUserImpersonateAttributes::class),
+        ->attributes(AddUserImpersonateAttributes::class),
 
     (new Extend\Policy())
         ->modelPolicy(User::class, Access\UserPolicy::class),

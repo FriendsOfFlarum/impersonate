@@ -1,9 +1,9 @@
-import { extend } from 'flarum/extend';
-import app from 'flarum/app';
-import UserControls from 'flarum/utils/UserControls';
-import Button from 'flarum/components/Button';
-import Model from 'flarum/Model';
-import User from 'flarum/models/User';
+import { extend } from 'flarum/common/extend';
+import app from 'flarum/common/app';
+import UserControls from 'flarum/common/utils/UserControls';
+import Button from 'flarum/common/components/Button';
+import Model from 'flarum/common/Model';
+import User from 'flarum/common/models/User';
 import ImpersonateModal from './components/impersonateModal';
 import ImpersonateModel from './model/Impersonate';
 

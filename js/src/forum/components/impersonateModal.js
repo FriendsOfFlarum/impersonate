@@ -1,8 +1,8 @@
-import Modal from 'flarum/components/Modal';
-import Button from 'flarum/components/Button';
-import username from 'flarum/helpers/username';
-import stream from 'flarum/utils/Stream';
-import withAttr from 'flarum/utils/withAttr';
+import Modal from 'flarum/common/components/Modal';
+import Button from 'flarum/common/components/Button';
+import username from 'flarum/common/helpers/username';
+import stream from 'flarum/common/utils/Stream';
+import withAttr from 'flarum/common/utils/withAttr';
 
 export default class ImpersonateModal extends Modal {
     oninit(vnode) {

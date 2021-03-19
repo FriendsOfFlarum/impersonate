@@ -34,12 +34,12 @@
         }
     ],
     "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+        "flarum/core": "^0.1.0-beta.16"
     },
     "extra": {
         "flarum-extension": {
             "title": "FoF Impersonate",
-            "category": "moderation",
+            "category": "feature",
             "icon": {
                 "name": "fas fa-id-card",
                 "backgroundColor": "#e74c3c",
