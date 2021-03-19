@@ -3,9 +3,9 @@
 /*
  * This file is part of fof/impersonate.
  *
- * Copyright (c) 2020 FriendsOfFlarum.
+ * Copyright (c) 2020 - 2021 FriendsOfFlarum.
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -22,7 +22,7 @@ return [
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js'),
 
-    new Extend\Locales(__DIR__ . '/resources/locale'),
+    new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\Routes('api'))
         ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),

@@ -3,9 +3,9 @@
 /*
  * This file is part of fof/impersonate.
  *
- * Copyright (c) 2020 FriendsOfFlarum.
+ * Copyright (c) 2020 - 2021 FriendsOfFlarum.
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -18,8 +18,8 @@ use Flarum\Http\SessionAuthenticator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
 use FoF\Impersonate\Events\Impersonated;
-use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Events\Dispatcher;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -66,9 +66,12 @@ class LoginController implements RequestHandlerInterface
 
     /**
      * Handle the request and return a response.
+     *
      * @param ServerRequestInterface $request
-     * @return ResponseInterface
+     *
      * @throws \Flarum\User\Exception\PermissionDeniedException
+     *
+     * @return ResponseInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -85,7 +88,7 @@ class LoginController implements RequestHandlerInterface
 
         if ((bool) $this->settings->get('fof-impersonate.require_reason') && $reason === '') {
             throw new ValidationException([
-                'error' => $this->translator->trans('fof-impersonate.forum.modal.placeholder_required')
+                'error' => $this->translator->trans('fof-impersonate.forum.modal.placeholder_required'),
             ]);
         }
 
@@ -107,11 +110,11 @@ class LoginController implements RequestHandlerInterface
         return $this->rememberer->forget(new JsonResponse(
             [
                 'data' => [
-                    'type' => 'impersonate',
+                    'type'       => 'impersonate',
                     'attributes' => [
-                        'success' => true
-                    ]
-                ]
+                        'success' => true,
+                    ],
+                ],
             ]
         ));
     }

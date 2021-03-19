@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/impersonate.
+ *
+ * Copyright (c) 2020 - 2021 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\Impersonate;
 
 use Flarum\Api\Serializer\UserSerializer;
@@ -9,12 +18,12 @@ use Flarum\User\User;
 class AddUserImpersonateAttributes
 {
     protected $settings;
-    
+
     public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
     }
-    
+
     public function __invoke(UserSerializer $serializer, User $user)
     {
         $attributes = [];

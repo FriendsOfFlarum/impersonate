@@ -3,9 +3,9 @@
 /*
  * This file is part of fof/impersonate.
  *
- * Copyright (c) 2020 FriendsOfFlarum.
+ * Copyright (c) 2020 - 2021 FriendsOfFlarum.
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -16,7 +16,6 @@ $permissionKey = 'fof-impersonate.login';
 
 return [
     'up' => function (Builder $schema) use ($permissionKey) {
-
         $db = $schema->getConnection();
         $permission = $db->table('group_permission')
             ->where('permission', 'flagrow-impersonate.login');

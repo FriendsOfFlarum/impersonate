@@ -3,9 +3,9 @@
 /*
  * This file is part of fof/impersonate.
  *
- * Copyright (c) 2020 FriendsOfFlarum.
+ * Copyright (c) 2020 - 2021 FriendsOfFlarum.
  *
- * For the full copyright and license information, please view the LICENSE
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -24,7 +24,7 @@ class UserPolicy extends AbstractPolicy
             (!$user->isAdmin() || $actor->isAdmin())
         ) {
             return $this->allow();
-        };
+        }
 
         return $this->deny();
     }
