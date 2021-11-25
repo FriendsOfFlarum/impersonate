@@ -1,6 +1,6 @@
 import { extend } from 'flarum/common/extend';
-import app from 'flarum/common/app';
-import UserControls from 'flarum/common/utils/UserControls';
+import app from 'flarum/forum/app';
+import UserControls from 'flarum/forum/utils/UserControls';
 import Button from 'flarum/common/components/Button';
 import Model from 'flarum/common/Model';
 import User from 'flarum/common/models/User';

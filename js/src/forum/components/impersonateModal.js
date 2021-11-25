@@ -1,3 +1,4 @@
+import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import username from 'flarum/common/helpers/username';
