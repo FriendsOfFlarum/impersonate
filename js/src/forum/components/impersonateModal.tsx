@@ -1,29 +1,46 @@
 import app from 'flarum/forum/app';
-import Modal from 'flarum/common/components/Modal';
+import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
+
 import Button from 'flarum/common/components/Button';
 import username from 'flarum/common/helpers/username';
-import stream from 'flarum/common/utils/Stream';
+import Stream from 'flarum/common/utils/Stream';
 import withAttr from 'flarum/common/utils/withAttr';
+import type User from 'flarum/common/models/User';
+import type Mithril from 'mithril';
+import type { NestedStringArray } from '@askvortsov/rich-icu-message-formatter';
+import RequestError from 'flarum/common/utils/RequestError';
 
-export default class ImpersonateModal extends Modal {
-  oninit(vnode) {
+export interface ImpersonateModalAttrs extends IInternalModalAttrs {
+  user: User;
+  callback?: () => void;
+}
+
+export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
+  user!: Stream<User>;
+  reason!: Stream<string>;
+  loading!: Stream<boolean>;
+  reasonEnabled!: Stream<boolean>;
+  reasonRequired!: Stream<boolean>;
+
+  oninit(vnode: Mithril.Vnode<ImpersonateModalAttrs, this>): void {
     super.oninit(vnode);
+
     this.user = this.attrs.user;
-    this.reason = stream('');
+    this.reason = Stream('');
     this.loading = false;
     this.reasonEnabled = app.initializers.has('fof-moderator-notes');
     this.reasonRequired = this.user.impersonateReasonRequired();
   }
 
-  className() {
+  className(): string {
     return 'ImpersonateModal Modal--medium';
   }
 
-  title() {
+  title(): NestedStringArray {
     return app.translator.trans('fof-impersonate.forum.modal.title');
   }
 
-  content() {
+  content(): Mithril.Children {
     return (
       <div className="Modal-body">
         <div>
@@ -68,7 +85,7 @@ export default class ImpersonateModal extends Modal {
     );
   }
 
-  onsubmit(e) {
+  onsubmit(e: Event): void {
     e.preventDefault();
     this.loading = true;
 
@@ -85,8 +102,9 @@ export default class ImpersonateModal extends Modal {
       .catch(() => {});
   }
 
-  onerror(error) {
+  onerror(error: RequestError<string>) {
     if (error.status === 422) {
+      // @ts-ignore
       error.alert.props.children = app.translator.trans('fof-impersonate.forum.modal.placeholder_required');
     }
     this.loading = false;
