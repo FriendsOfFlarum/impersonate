@@ -2,7 +2,7 @@ import { extend } from 'flarum/common/extend';
 import app from 'flarum/forum/app';
 import UserControls from 'flarum/forum/utils/UserControls';
 import Button from 'flarum/common/components/Button';
-import ImpersonateModal from './components/impersonateModal';
+import ImpersonateModal from '../common/components/ImpersonateModal';
 
 export { default as extend } from './extend';
 
