@@ -8,7 +8,6 @@ import withAttr from 'flarum/common/utils/withAttr';
 import type User from 'flarum/common/models/User';
 import type Mithril from 'mithril';
 import type { NestedStringArray } from '@askvortsov/rich-icu-message-formatter';
-import RequestError from 'flarum/common/utils/RequestError';
 
 export interface ImpersonateModalAttrs extends IInternalModalAttrs {
   user: User;
@@ -91,23 +90,13 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
 
     app.store
       .createRecord('impersonate')
-      .save(
-        {
-          userId: this.user.id(),
-          reason: this.reason(),
-        },
-        { errorHandler: this.onerror.bind(this) }
-      )
+      .save({
+        userId: this.user.id(),
+        reason: this.reason(),
+      })
       .then(this.attrs.callback)
-      .catch(() => {});
-  }
-
-  onerror(error: RequestError<string>) {
-    if (error.status === 422) {
-      // @ts-ignore
-      error.alert.props.children = app.translator.trans('fof-impersonate.forum.modal.placeholder_required');
-    }
-    this.loading = false;
-    super.onerror(error);
+      .catch(() => {
+        this.loading = false;
+      });
   }
 }
