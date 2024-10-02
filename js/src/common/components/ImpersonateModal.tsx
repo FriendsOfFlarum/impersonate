@@ -1,4 +1,4 @@
-import app from 'flarum/forum/app';
+import app from 'flarum/common/app';
 import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
 
 import Button from 'flarum/common/components/Button';
