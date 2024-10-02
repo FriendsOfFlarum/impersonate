@@ -21,7 +21,7 @@ app.initializers.add('fof-impersonate', () => {
               });
             },
           },
-          app.translator.trans('fof-impersonate.forum.user_controls.impersonate_button')
+          app.translator.trans('fof-impersonate.lib.user_controls.impersonate_button')
         )
       );
     }
