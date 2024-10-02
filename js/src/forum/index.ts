@@ -2,16 +2,11 @@ import { extend } from 'flarum/common/extend';
 import app from 'flarum/forum/app';
 import UserControls from 'flarum/forum/utils/UserControls';
 import Button from 'flarum/common/components/Button';
-import Model from 'flarum/common/Model';
-import User from 'flarum/common/models/User';
 import ImpersonateModal from './components/impersonateModal';
-import ImpersonateModel from './model/Impersonate';
+
+export { default as extend } from './extend';
 
 app.initializers.add('fof-impersonate', () => {
-  User.prototype.canFoFImpersonate = Model.attribute('canFoFImpersonate');
-  User.prototype.impersonateReasonRequired = Model.attribute('impersonateReasonRequired');
-  app.store.models.impersonate = ImpersonateModel;
-
   extend(UserControls, 'moderationControls', (items, user) => {
     if (user.canFoFImpersonate()) {
       items.add(
