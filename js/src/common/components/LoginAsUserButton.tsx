@@ -6,6 +6,7 @@ import ImpersonateModal from './ImpersonateModal';
 
 export interface ILoginAsUserButtonAttrs extends IButtonAttrs {
   user: User;
+  redirectTo?: string;
 }
 
 export default class LoginAsUserButton extends Button<ILoginAsUserButtonAttrs> {
@@ -18,10 +19,11 @@ export default class LoginAsUserButton extends Button<ILoginAsUserButtonAttrs> {
   }
 
   loginAsUser(): void {
-    const { user } = this.attrs;
-    console.log('loginAsUser', user);
+    const { user, redirectTo } = this.attrs;
     app.modal.show(ImpersonateModal, {
-      callback: () => window.location.reload(),
+      callback: () => {
+        redirectTo ? (window.location.href = redirectTo) : window.location.reload();
+      },
       user,
     });
   }
