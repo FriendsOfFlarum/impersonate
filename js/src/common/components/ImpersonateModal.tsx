@@ -1,4 +1,4 @@
-import app from 'flarum/forum/app';
+import app from 'flarum/common/app';
 import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
 
 import Button from 'flarum/common/components/Button';
@@ -36,7 +36,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
   }
 
   title(): NestedStringArray {
-    return app.translator.trans('fof-impersonate.forum.modal.title');
+    return app.translator.trans('fof-impersonate.lib.modal.title');
   }
 
   content(): Mithril.Children {
@@ -44,7 +44,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
       <div className="Modal-body">
         <div>
           <p>
-            {app.translator.trans('fof-impersonate.forum.modal.label', {
+            {app.translator.trans('fof-impersonate.lib.modal.label', {
               username: username(this.user),
             })}
           </p>
@@ -57,8 +57,8 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
                 value={this.reason()}
                 placeholder={
                   this.reasonRequired
-                    ? app.translator.trans('fof-impersonate.forum.modal.placeholder_required')
-                    : app.translator.trans('fof-impersonate.forum.modal.placeholder_optional')
+                    ? app.translator.trans('fof-impersonate.lib.modal.placeholder_required')
+                    : app.translator.trans('fof-impersonate.lib.modal.placeholder_optional')
                 }
                 oninput={withAttr('value', this.reason)}
                 rows="4"
@@ -74,7 +74,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
                 type: 'submit',
                 loading: this.loading,
               },
-              app.translator.trans('fof-impersonate.forum.modal.impersonate_username', {
+              app.translator.trans('fof-impersonate.lib.modal.impersonate_username', {
                 username: username(this.user),
               })
             )}
