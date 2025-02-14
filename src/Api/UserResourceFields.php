@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/impersonate.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\Impersonate\Api;
 
 use Flarum\Api\Context;
@@ -13,7 +22,7 @@ class UserResourceFields
         protected SettingsRepositoryInterface $settings
     ) {
     }
-    
+
     public function __invoke(): array
     {
         return [

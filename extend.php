@@ -11,12 +11,9 @@
 
 namespace FoF\Impersonate;
 
+use Flarum\Api\Resource;
 use Flarum\Extend;
 use Flarum\User\User;
-use Flarum\Api\Context;
-use Flarum\Api\Endpoint;
-use Flarum\Api\Resource;
-use Flarum\Api\Schema;
 
 return [
     (new Extend\Frontend('forum'))
