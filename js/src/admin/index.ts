@@ -4,7 +4,7 @@ import extendUserListPage from './extendUserListPage';
 export { default as extend } from './extend';
 
 app.initializers.add('fof-impersonate', () => {
-  app.extensionData.for('fof-impersonate').registerPermission(
+  app.registry.for('fof-impersonate').registerPermission(
     {
       icon: 'fas fa-id-card',
       label: app.translator.trans('fof-impersonate.admin.permissions.login'),
