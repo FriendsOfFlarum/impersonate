@@ -17,11 +17,8 @@ use Flarum\User\User;
 
 class AddUserImpersonateAttributes
 {
-    protected $settings;
-
-    public function __construct(SettingsRepositoryInterface $settings)
+    public function __construct(protected SettingsRepositoryInterface $settings)
     {
-        $this->settings = $settings;
     }
 
     public function __invoke(UserSerializer $serializer, User $user)

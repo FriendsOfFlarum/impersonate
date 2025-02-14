@@ -15,25 +15,7 @@ use Flarum\User\User;
 
 class Impersonated
 {
-    /**
-     * @var User
-     */
-    public $actor;
-
-    /**
-     * @var User
-     */
-    public $user;
-
-    /**
-     * @var string
-     */
-    public $switchReason;
-
-    public function __construct(User $actor, User $user, string $switchReason)
+    public function __construct(public User $actor, public User $user, public string $switchReason)
     {
-        $this->actor = $actor;
-        $this->user = $user;
-        $this->switchReason = $switchReason;
     }
 }
