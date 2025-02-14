@@ -11,7 +11,6 @@
 
 namespace FoF\Impersonate;
 
-use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
 use Flarum\User\User;
 use Flarum\Api\Context;
@@ -31,9 +30,6 @@ return [
     (new Extend\Routes('api'))
         ->post('/impersonate', 'fof.impersonate.api.login', Controllers\LoginController::class),
 
-    // @TODO: Replace with the new implementation https://docs.flarum.org/2.x/extend/api#extending-api-resources
-    // (new Extend\ApiSerializer(UserSerializer::class))
-    //     ->attributes(AddUserImpersonateAttributes::class),
     (new Extend\ApiResource(Resource\UserResource::class))
         ->fields(Api\UserResourceFields::class),
 
