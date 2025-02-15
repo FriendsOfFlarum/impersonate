@@ -1,5 +1,8 @@
+import Form from 'flarum/common/components/Form';
 import app from 'flarum/common/app';
-import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
+import { IFormModalAttrs } from 'flarum/common/components/FormModal';
+
+import FormModal from 'flarum/common/components/FormModal';
 
 import Button from 'flarum/common/components/Button';
 import username from 'flarum/common/helpers/username';
@@ -7,14 +10,13 @@ import Stream from 'flarum/common/utils/Stream';
 import withAttr from 'flarum/common/utils/withAttr';
 import type User from 'flarum/common/models/User';
 import type Mithril from 'mithril';
-import type { NestedStringArray } from '@askvortsov/rich-icu-message-formatter';
 
-export interface ImpersonateModalAttrs extends IInternalModalAttrs {
+export interface ImpersonateModalAttrs extends IFormModalAttrs {
   user: User;
   callback?: () => void;
 }
 
-export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
+export default class ImpersonateModal extends FormModal<ImpersonateModalAttrs> {
   user!: Stream<User>;
   reason!: Stream<string>;
   loading!: Stream<boolean>;
@@ -35,8 +37,8 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
     return 'ImpersonateModal Modal--medium';
   }
 
-  title(): NestedStringArray {
-    return app.translator.trans('fof-impersonate.lib.modal.title');
+  title(): string {
+    return app.translator.trans('fof-impersonate.lib.modal.title') as string;
   }
 
   content(): Mithril.Children {
@@ -49,7 +51,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
             })}
           </p>
         </div>
-        <div className="Form Form--centered">
+        <Form className="Form--centered">
           {this.reasonEnabled ? (
             <div className="Form-group">
               <textarea
@@ -79,7 +81,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
               })
             )}
           </div>
-        </div>
+        </Form>
       </div>
     );
   }

@@ -11,7 +11,6 @@
 
 namespace FoF\Impersonate\Controllers;
 
-use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\RequestUtil;
@@ -30,40 +29,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginController implements RequestHandlerInterface
 {
-    /**
-     * @var SessionAuthenticator
-     */
-    protected $authenticator;
-
-    /**
-     * @var Rememberer
-     */
-    protected $rememberer;
-
-    /**
-     * @var Dispatcher
-     */
-    protected $bus;
-
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    public $serializer = UserSerializer::class;
-
-    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, Dispatcher $bus, SettingsRepositoryInterface $settings, TranslatorInterface $translator)
+    public function __construct(protected SessionAuthenticator $authenticator, protected Rememberer $rememberer, protected Dispatcher $bus, protected SettingsRepositoryInterface $settings, protected TranslatorInterface $translator)
     {
-        $this->authenticator = $authenticator;
-        $this->rememberer = $rememberer;
-        $this->bus = $bus;
-        $this->settings = $settings;
-        $this->translator = $translator;
     }
 
     /**

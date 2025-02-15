@@ -16,7 +16,7 @@ use Flarum\User\User;
 
 class UserPolicy extends AbstractPolicy
 {
-    public function fofCanImpersonate(User $actor, User $user)
+    public function fofCanImpersonate(User $actor, User $user): ?string
     {
         if (
             $actor->hasPermission('fof-impersonate.login') &&
