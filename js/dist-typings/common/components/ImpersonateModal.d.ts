@@ -1,13 +1,13 @@
-import Modal, { IInternalModalAttrs } from 'flarum/common/components/Modal';
+import { IFormModalAttrs } from 'flarum/common/components/FormModal';
+import FormModal from 'flarum/common/components/FormModal';
 import Stream from 'flarum/common/utils/Stream';
 import type User from 'flarum/common/models/User';
 import type Mithril from 'mithril';
-import type { NestedStringArray } from '@askvortsov/rich-icu-message-formatter';
-export interface ImpersonateModalAttrs extends IInternalModalAttrs {
+export interface ImpersonateModalAttrs extends IFormModalAttrs {
     user: User;
     callback?: () => void;
 }
-export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
+export default class ImpersonateModal extends FormModal<ImpersonateModalAttrs> {
     user: Stream<User>;
     reason: Stream<string>;
     loading: Stream<boolean>;
@@ -15,7 +15,7 @@ export default class ImpersonateModal extends Modal<ImpersonateModalAttrs> {
     reasonRequired: Stream<boolean>;
     oninit(vnode: Mithril.Vnode<ImpersonateModalAttrs, this>): void;
     className(): string;
-    title(): NestedStringArray;
+    title(): string;
     content(): Mithril.Children;
     onsubmit(e: Event): void;
 }
