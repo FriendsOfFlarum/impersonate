@@ -17,7 +17,7 @@
         },
         {
             "name": "IanM",
-            "email": "ian@blomstra.net",
+            "email": "ian@flarum.org",
             "role": "Developer"
         }
     ],
@@ -34,7 +34,7 @@
         }
     ],
     "require": {
-        "flarum/core": "@dev"
+        "flarum/core": "*@dev"
     },
     "extra": {
         "flarum-extension": {
@@ -67,8 +67,8 @@
         }
     },
     "require-dev": {
-        "flarum/testing": "@dev",
-        "flarum/phpstan": "@dev"
+        "flarum/testing": "*@dev",
+        "flarum/phpstan": "*@dev"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
