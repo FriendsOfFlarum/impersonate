@@ -10,7 +10,6 @@ import Stream from 'flarum/common/utils/Stream';
 import withAttr from 'flarum/common/utils/withAttr';
 import type User from 'flarum/common/models/User';
 import type Mithril from 'mithril';
-import type { NestedStringArray } from '@askvortsov/rich-icu-message-formatter';
 
 export interface ImpersonateModalAttrs extends IFormModalAttrs {
   user: User;
@@ -38,8 +37,8 @@ export default class ImpersonateModal extends FormModal<ImpersonateModalAttrs> {
     return 'ImpersonateModal Modal--medium';
   }
 
-  title(): NestedStringArray {
-    return app.translator.trans('fof-impersonate.lib.modal.title');
+  title(): string {
+    return app.translator.trans('fof-impersonate.lib.modal.title') as string;
   }
 
   content(): Mithril.Children {
