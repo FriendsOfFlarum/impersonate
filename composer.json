@@ -34,7 +34,7 @@
         }
     ],
     "require": {
-        "flarum/core": "*@dev"
+        "flarum/core": "2.x-dev"
     },
     "extra": {
         "branch-alais": {
@@ -70,8 +70,8 @@
         }
     },
     "require-dev": {
-        "flarum/testing": "*@dev",
-        "flarum/phpstan": "*@dev"
+        "flarum/testing": "2.x-dev",
+        "flarum/phpstan": "2.x-dev"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
