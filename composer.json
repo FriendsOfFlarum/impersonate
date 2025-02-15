@@ -37,6 +37,9 @@
         "flarum/core": "*@dev"
     },
     "extra": {
+        "branch-alais": {
+            "2.x": "2.x-dev"
+        },
         "flarum-extension": {
             "title": "FoF Impersonate",
             "category": "feature",
