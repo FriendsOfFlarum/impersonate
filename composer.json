@@ -34,7 +34,7 @@
         }
     ],
     "require": {
-        "flarum/core": "^2.0.0-beta"
+        "flarum/core": "@dev"
     },
     "extra": {
         "flarum-extension": {
@@ -67,8 +67,8 @@
         }
     },
     "require-dev": {
-        "flarum/testing": "^2.0.0-beta.2",
-        "flarum/phpstan": "^2.0.0-beta.2"
+        "flarum/testing": "@dev",
+        "flarum/phpstan": "@dev"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
