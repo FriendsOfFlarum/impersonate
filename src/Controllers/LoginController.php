@@ -11,6 +11,7 @@
 
 namespace FoF\Impersonate\Controllers;
 
+use Flarum\Extension\ExtensionManager;
 use Flarum\Foundation\ValidationException;
 use Flarum\Http\Rememberer;
 use Flarum\Http\RequestUtil;
@@ -29,8 +30,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LoginController implements RequestHandlerInterface
 {
-    public function __construct(protected SessionAuthenticator $authenticator, protected Rememberer $rememberer, protected Dispatcher $bus, protected SettingsRepositoryInterface $settings, protected TranslatorInterface $translator)
-    {
+    public function __construct(
+        protected SessionAuthenticator $authenticator,
+        protected Rememberer $rememberer,
+        protected Dispatcher $bus,
+        protected SettingsRepositoryInterface $settings,
+        protected TranslatorInterface $translator,
+        protected ExtensionManager $extensions
+    ) {
     }
 
     /**
@@ -55,7 +62,7 @@ class LoginController implements RequestHandlerInterface
         $id = $requestData['userId'];
         $reason = $requestData['reason'];
 
-        if ((bool) $this->settings->get('fof-impersonate.require_reason') && $reason === '') {
+        if ($this->extensions->isEnabled('fof-moderator-notes') && (bool) $this->settings->get('fof-impersonate.require_reason') && empty($reason)) {
             throw new ValidationException([
                 'error' => $this->translator->trans('fof-impersonate.forum.modal.placeholder_required'),
             ]);
