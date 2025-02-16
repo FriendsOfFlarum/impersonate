@@ -37,7 +37,7 @@
         "flarum/core": "2.x-dev"
     },
     "extra": {
-        "branch-alais": {
+        "branch-alias": {
             "2.x": "2.x-dev"
         },
         "flarum-extension": {
