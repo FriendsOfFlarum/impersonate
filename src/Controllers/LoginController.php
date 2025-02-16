@@ -37,7 +37,8 @@ class LoginController implements RequestHandlerInterface
         protected SettingsRepositoryInterface $settings,
         protected TranslatorInterface $translator,
         protected ExtensionManager $extensions
-    ) {}
+    ) {
+    }
 
     /**
      * Handle the request and return a response.
