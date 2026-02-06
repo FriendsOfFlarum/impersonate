@@ -34,7 +34,7 @@
         }
     ],
     "require": {
-        "flarum/core": "2.x-dev"
+        "flarum/core": "^2.0.0"
     },
     "extra": {
         "branch-alias": {
@@ -70,8 +70,8 @@
         }
     },
     "require-dev": {
-        "flarum/testing": "2.x-dev",
-        "flarum/phpstan": "2.x-dev"
+        "flarum/testing": "^2.0.0",
+        "flarum/phpstan": "^2.0.0"
     },
     "scripts": {
         "analyse:phpstan": "phpstan analyse",
@@ -80,5 +80,6 @@
     "scripts-descriptions": {
         "analyse:phpstan": "Run static analysis"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "beta",
+    "prefer-stable": true
 }
