@@ -29,7 +29,7 @@ export default class ImpersonateModal extends FormModal<ImpersonateModalAttrs> {
     this.user = this.attrs.user;
     this.reason = Stream('');
     this.loading = false;
-    this.reasonEnabled = app.initializers.has('fof-moderator-notes');
+    this.reasonEnabled = 'fof-moderator-notes' in flarum.extensions || 'flarum-audit' in flarum.extensions;
     this.reasonRequired = this.user.impersonateReasonRequired();
   }
 
