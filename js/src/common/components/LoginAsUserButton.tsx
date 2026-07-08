@@ -2,7 +2,6 @@ import app from 'flarum/common/app';
 import Button from 'flarum/common/components/Button';
 import type { IButtonAttrs } from 'flarum/common/components/Button';
 import type User from 'flarum/common/models/User';
-import ImpersonateModal from './ImpersonateModal';
 
 export interface ILoginAsUserButtonAttrs extends IButtonAttrs {
   user: User;
@@ -20,7 +19,7 @@ export default class LoginAsUserButton extends Button<ILoginAsUserButtonAttrs> {
 
   loginAsUser(): void {
     const { user, redirectTo } = this.attrs;
-    app.modal.show(ImpersonateModal, {
+    app.modal.show(() => import('./ImpersonateModal'), {
       callback: () => {
         redirectTo ? (window.location.href = redirectTo) : window.location.reload();
       },

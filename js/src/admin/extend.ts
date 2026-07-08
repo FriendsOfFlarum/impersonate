@@ -4,12 +4,13 @@ import { default as commonExtend } from '../common/extend';
 
 const settings = [];
 
-if (app.initializers.has('fof-moderator-notes')) {
+if ('fof-moderator-notes' in flarum.extensions || 'flarum-audit' in flarum.extensions) {
   settings.push(
     new Extend.Admin().setting(() => ({
       setting: 'fof-impersonate.require_reason',
       type: 'boolean',
       label: app.translator.trans('fof-impersonate.admin.settings.require_reason'),
+      help: app.translator.trans('fof-impersonate.admin.settings.require_reason_help'),
     }))
   );
 }
