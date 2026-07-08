@@ -69,15 +69,29 @@
             "FoF\\Impersonate\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "FoF\\Impersonate\\Tests\\": "tests/"
+        }
+    },
     "require-dev": {
+        "flarum/audit": "*",
         "flarum/testing": "^2.0.0",
         "flarum/phpstan": "^2.0.0"
     },
     "scripts": {
+        "test": [
+            "@test:integration"
+        ],
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php",
         "analyse:phpstan": "phpstan analyse",
         "clear-cache:phpstan": "phpstan clear-result-cache"
     },
     "scripts-descriptions": {
+        "test": "Runs all tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once.",
         "analyse:phpstan": "Run static analysis"
     },
     "minimum-stability": "beta",
