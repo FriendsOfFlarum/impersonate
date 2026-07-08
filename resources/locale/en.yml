@@ -16,3 +16,12 @@ fof-impersonate:
             impersonate_username: Login as {username}
         user_controls:
             impersonate_button: Login as user
+
+# Labels for the audit log entries this extension produces, rendered by the (optional)
+# flarum/audit browser. Defined under the flarum-audit namespace so the audit frontend
+# resolves them, but shipped here so they travel with the extension that owns the actions.
+flarum-audit:
+    lib:
+        browser:
+            user:
+                impersonated: Impersonated {username}

@@ -14,6 +14,7 @@ namespace FoF\Impersonate;
 use Flarum\Api\Resource;
 use Flarum\Extend;
 use Flarum\User\User;
+use FoF\Impersonate\Events\Impersonated;
 
 return [
     (new Extend\Frontend('forum'))
@@ -32,4 +33,14 @@ return [
 
     (new Extend\Policy())
         ->modelPolicy(User::class, Access\UserPolicy::class),
+
+    (new Extend\Conditional())
+        ->whenExtensionEnabled('flarum-audit', fn () => [
+            (new \Flarum\Audit\Extend\Audit())
+                ->group('fof-impersonate')
+                ->listen(Impersonated::class, 'user.impersonated', fn ($e) => [
+                    'user_id' => $e->user->id,
+                    'reason'  => $e->switchReason ?: null,
+                ]),
+        ]),
 ];
