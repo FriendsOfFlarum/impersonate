@@ -1,4 +1,3 @@
-/// <reference types="mithril" />
 import Button from 'flarum/common/components/Button';
 import type { IButtonAttrs } from 'flarum/common/components/Button';
 import type User from 'flarum/common/models/User';
